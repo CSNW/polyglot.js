@@ -16,11 +16,18 @@
 //
 
 'use strict';
+(function() {
 
-var forEach = require('for-each');
-var warning = require('warning');
-var has = require('has');
-var trim = require('string.prototype.trim');
+var forEach = function forEach(obj, callback, ctx) {
+  if (obj.toString() == '[object Array]')
+    return obj.forEach(callback);
+
+  for (var k in obj)
+    callback.call(ctx, obj[k], k, obj);
+};
+var warning = function warning(shouldBeTrue, str) { if (!shouldBeTrue) console.warn(str); };
+var has = function has(obj, attr) { return attr in obj; };
+var trim = function trim(str) { return str.trim(); };
 
 var warn = function warn(message) {
   warning(false, message);
@@ -332,4 +339,9 @@ Polyglot.prototype.has = function (key) {
 // export transformPhrase
 Polyglot.transformPhrase = transformPhrase;
 
-module.exports = Polyglot;
+// export for the Browser and Node
+if (typeof window != 'undefined')
+  window.Polyglot = Polyglot;
+else if (typeof module != 'undefined')
+  module.exports = Polyglot;
+})();

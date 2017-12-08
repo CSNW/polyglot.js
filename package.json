@@ -5,10 +5,8 @@
   "main": "index.js",
   "scripts": {
     "prepublish": "safe-publish-latest",
-    "pretest": "npm run --silent lint",
     "test": "npm run --silent tests-only",
     "tests-only": "mocha test/*.js --reporter spec",
-    "lint": "eslint *.js test/*.js",
     "docs": "docco -o docs/ index.js"
   },
   "repository": {
