@@ -25,13 +25,9 @@ var forEach = function forEach(obj, callback, thisArg) {
   for (var k in obj)
     callback.call(thisArg, obj[k], k, obj);
 };
-var warning = function warning(shouldBeTrue, str) { if (!shouldBeTrue) console.warn(str); };
 var has = function has(obj, attr) { return attr in obj; };
 var trim = function trim(str) { return str.trim(); };
-
-var warn = function warn(message) {
-  warning(false, message);
-};
+var warn = function warn(message) { console.warn(message); };
 
 var replace = String.prototype.replace;
 var split = String.prototype.split;
