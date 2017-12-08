@@ -18,12 +18,12 @@
 'use strict';
 (function() {
 
-var forEach = function forEach(obj, callback, ctx) {
+var forEach = function forEach(obj, callback, thisArg) {
   if (obj.toString() == '[object Array]')
-    return obj.forEach(callback);
+    return obj.forEach(callback, thisArg);
 
   for (var k in obj)
-    callback.call(ctx, obj[k], k, obj);
+    callback.call(thisArg, obj[k], k, obj);
 };
 var warning = function warning(shouldBeTrue, str) { if (!shouldBeTrue) console.warn(str); };
 var has = function has(obj, attr) { return attr in obj; };
